@@ -7,19 +7,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import Entities.UsuarioEntity;
 import Intermediate.Define_Tabela;
 
-public class CriaBanco extends SQLiteOpenHelper {
+public class UsuarioDAL extends SQLiteOpenHelper {
 
     public static final String NOME_BANCO = "MyNorth.db";
-    public static String TABELA = Define_Tabela.getNOME_TABELA();
+    public static String TABELA = "usuario";
     //public static String QUERY = Define_Tabela.getQuerySql();
     public static String ID = "_id";
     public static String LOGIN = "login";
     public static String SENHA = "senha";
-//    public UsuarioEntity usuarioEntity = new UsuarioEntity();
+    //public UsuarioEntity usuarioEntity = new UsuarioEntity();
     public static final int VERSAO = 1;
 
 
-    public CriaBanco(Context context) {
+    public UsuarioDAL(Context context) {
         super(context, NOME_BANCO,null, VERSAO);
     }
 

@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText senha;
     private Button entrar;
     private TextView cadastrar;
+    private TextView consultar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +25,20 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editSenhaId);
         entrar = findViewById(R.id.btnEntrarId);
         cadastrar = findViewById(R.id.txtCadastroId);
-
-
-
+        consultar = findViewById(R.id.consultarID);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, CadastrarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        consultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
                 startActivity(intent);
             }
         });

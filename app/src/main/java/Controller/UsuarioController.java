@@ -4,22 +4,20 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.Settings;
 
-import DAL.CriaBanco;
+import DAL.UsuarioDAL;
 import Entities.UsuarioEntity;
 import Intermediate.Define_Tabela;
 
 public class UsuarioController{
 
     private SQLiteDatabase db;
-    private CriaBanco banco;
+    private UsuarioDAL banco;
     private UsuarioEntity usuarioEntity = new UsuarioEntity();
     private Define_Tabela dt = new Define_Tabela();
 
     public UsuarioController(Context context) {
-        banco = new CriaBanco(context);
-        banco.TABELA = dt.setNOME_TABELA("usuario");
+        banco = new UsuarioDAL(context);
     }
 
     public String inserirUsuario(String login, String senha){
@@ -28,8 +26,8 @@ public class UsuarioController{
 
         db = banco.getWritableDatabase();
         valores = new ContentValues();
-        valores.put(usuarioEntity.login, login);
-        valores.put(usuarioEntity.senha, senha);
+        valores.put(banco.LOGIN, login);
+        valores.put(banco.SENHA, senha);
 
         resultado = db.insert(banco.TABELA, null, valores);
         db.close();
@@ -43,12 +41,13 @@ public class UsuarioController{
     public Cursor carregaDados(){
         Cursor cursor;
         String[] campos = {
-                usuarioEntity.id,
-                usuarioEntity.login,
-                usuarioEntity.senha};
+                banco.ID,
+                banco.LOGIN,
+                banco.SENHA};
 
         db = banco.getReadableDatabase();
-        cursor = db.query(banco.TABELA, campos, null, null, null, null, null);
+        //cursor = db.query(banco.TABELA, campos, null, null, null, null, null);
+        cursor = db.rawQuery("SELECT * FROM usuario ORDER BY _id DESC", null);
         if (cursor!=null) {
             cursor.moveToFirst();
         }

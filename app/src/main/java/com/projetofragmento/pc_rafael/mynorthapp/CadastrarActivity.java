@@ -44,10 +44,9 @@ public class CadastrarActivity extends AppCompatActivity {
 
                 if (senhaValida) {
                     resultado = crudUser.inserirUsuario(loginString, senhaString);
-                    Toast.makeText(getBaseContext(), resultado, Toast.LENGTH_LONG).show();
-                    ConsultarDados();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                    Toast.makeText(getBaseContext(), resultado, Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(getBaseContext(), "Erro ao cadastrar usuário!", Toast.LENGTH_LONG).show();
                 }
