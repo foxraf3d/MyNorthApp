@@ -47,7 +47,7 @@ public class UsuarioController{
 
         db = banco.getReadableDatabase();
         //cursor = db.query(banco.TABELA, campos, null, null, null, null, null);
-        cursor = db.rawQuery("SELECT * FROM usuario ORDER BY _id DESC", null);
+        cursor = db.rawQuery("SELECT * FROM usuario ORDER BY _id", null);
         if (cursor!=null) {
             cursor.moveToFirst();
         }
