@@ -12,7 +12,7 @@ public class UsuarioDAL extends SQLiteOpenHelper {
     public static final String NOME_BANCO = "MyNorth.db";
     public static String TABELA = "usuario";
     //public static String QUERY = Define_Tabela.getQuerySql();
-    public static String ID = "_id";
+    public static String ID = "id";
     public static String LOGIN = "login";
     public static String SENHA = "senha";
     //public UsuarioEntity usuarioEntity = new UsuarioEntity();
