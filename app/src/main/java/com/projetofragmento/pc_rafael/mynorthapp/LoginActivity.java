@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import Controller.UsuarioController;
+import Intermediate.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button entrar;
     private TextView cadastrar;
     private TextView consultar;
+    private UsuarioController crudUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,23 @@ public class LoginActivity extends AppCompatActivity {
         entrar = findViewById(R.id.btnEntrarId);
         cadastrar = findViewById(R.id.txtCadastroId);
         consultar = findViewById(R.id.consultarID);
+
+        entrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crudUser = new UsuarioController(getBaseContext());
+                String loginString = login.getText().toString();
+                String senhaString = senha.getText().toString();
+
+                boolean usuarioValido = Util.usuarioExiste(loginString, senhaString);
+                if (usuarioValido){
+                    Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Usuário ou senha inválidos!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override

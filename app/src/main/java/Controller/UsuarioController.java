@@ -13,6 +13,7 @@ public class UsuarioController{
 
     private SQLiteDatabase db;
     private UsuarioDAL banco;
+    private Cursor cursor;
     private UsuarioEntity usuarioEntity = new UsuarioEntity();
     private Define_Tabela dt = new Define_Tabela();
 
@@ -39,12 +40,18 @@ public class UsuarioController{
     }
 
     public Cursor carregaDados(){
-        Cursor cursor;
         db = banco.getReadableDatabase();
         cursor = db.rawQuery("SELECT * FROM usuario ORDER BY id", null);
         if (cursor!=null) {
             cursor.moveToFirst();
         }
+        db.close();
+        return cursor;
+    }
+
+    public Cursor consultaUsuarioPorID(String id){
+        db = banco.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM usuario WHERE id  = "+id+"", null);
         db.close();
         return cursor;
     }
