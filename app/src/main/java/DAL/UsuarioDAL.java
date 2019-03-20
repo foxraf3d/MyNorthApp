@@ -25,7 +25,7 @@ public class UsuarioDAL extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE IF NOT EXISTS "+TABELA+"(" +
+        String sql = "CREATE TABLE "+TABELA+"(" +
                 ""+ID+" integer primary key autoincrement," +
                 ""+LOGIN+" text," +
                 ""+SENHA+" text)";
@@ -34,7 +34,7 @@ public class UsuarioDAL extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABELA);
+        db.execSQL("DROP TABLE IF EXISTS teste" + TABELA);
         onCreate(db);
     }
 }

@@ -40,14 +40,8 @@ public class UsuarioController{
 
     public Cursor carregaDados(){
         Cursor cursor;
-        String[] campos = {
-                banco.ID,
-                banco.LOGIN,
-                banco.SENHA};
-
         db = banco.getReadableDatabase();
-        //cursor = db.query(banco.TABELA, campos, null, null, null, null, null);
-        cursor = db.rawQuery("SELECT * FROM usuario ORDER BY _id", null);
+        cursor = db.rawQuery("SELECT * FROM usuario ORDER BY id", null);
         if (cursor!=null) {
             cursor.moveToFirst();
         }

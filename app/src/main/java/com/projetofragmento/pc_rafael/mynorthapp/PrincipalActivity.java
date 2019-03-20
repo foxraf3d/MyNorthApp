@@ -1,19 +1,16 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import Controller.UsuarioController;
-import DAL.UsuarioDAL;
-import Entities.UsuarioEntity;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -31,11 +28,12 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         listUser = findViewById(R.id.lstViewUserID);
+
         try {
             crudUser = new UsuarioController(getBaseContext());
             Cursor cursor = ConsultarDados();
 
-            int indiceColunaID = cursor.getColumnIndex("_id");
+            int indiceColunaID = cursor.getColumnIndex("id");
             int indiceColunaLogin = cursor.getColumnIndex("login");
 
             itens = new ArrayList<String>();
@@ -45,13 +43,17 @@ public class PrincipalActivity extends AppCompatActivity {
                     android.R.id.text1,
                     itens);
             listUser.setAdapter(itensAdaptador);
+            int size = cursor.getCount();
             cursor.moveToFirst();
-            while (cursor != null) {
+
+            for (int i = 1; i <= cursor.getCount(); i++){
                 itens.add(cursor.getString(indiceColunaLogin));
                 ids.add(Integer.parseInt(cursor.getString(indiceColunaID)));
-                Log.i("Resultado - ", "ID: " + cursor.getString(indiceColunaID) + " LOGIN: " + cursor.getString(indiceColunaLogin));
+                Log.i("Resultado ", "ID: " + cursor.getString(indiceColunaID) + " LOGIN: " + cursor.getString(indiceColunaLogin));
+                if (i <= cursor.getCount())
                 cursor.moveToNext();
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
