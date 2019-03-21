@@ -28,6 +28,14 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         listUser = findViewById(R.id.lstViewUserID);
+        user = findViewById(R.id.txtUserID);
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            String nomeUsuario = extras.getString("USUARIO");
+            user.setText(nomeUsuario);
+        }
 
         try {
             crudUser = new UsuarioController(getBaseContext());
@@ -43,7 +51,6 @@ public class PrincipalActivity extends AppCompatActivity {
                     android.R.id.text1,
                     itens);
             listUser.setAdapter(itensAdaptador);
-            int size = cursor.getCount();
             cursor.moveToFirst();
 
             for (int i = 1; i <= cursor.getCount(); i++){

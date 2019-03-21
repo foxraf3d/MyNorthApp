@@ -25,7 +25,7 @@ public class UsuarioDAL extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE "+TABELA+"(" +
+        String sql = "CREATE TABLE IF NOT EXISTS "+TABELA+"(" +
                 ""+ID+" integer primary key autoincrement," +
                 ""+LOGIN+" text," +
                 ""+SENHA+" text)";
