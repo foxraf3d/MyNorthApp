@@ -16,18 +16,12 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private TextView user;
     private UsuarioController crudUser;
-    private ArrayList<String> itens;
-    private ArrayAdapter<String> itensAdaptador;
-    private ArrayList<Integer>ids;
-    private ListView listUser;
-
-
+ 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        listUser = findViewById(R.id.lstViewUserID);
         user = findViewById(R.id.txtUserID);
 
         Bundle extras = getIntent().getExtras();
@@ -37,7 +31,7 @@ public class PrincipalActivity extends AppCompatActivity {
             user.setText(nomeUsuario);
         }
 
-        try {
+       /* try {
             crudUser = new UsuarioController(getBaseContext());
             Cursor cursor = ConsultarDados();
 
@@ -63,7 +57,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
     private Cursor ConsultarDados() {

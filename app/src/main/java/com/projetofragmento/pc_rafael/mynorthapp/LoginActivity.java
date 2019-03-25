@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText senha;
     private Button entrar;
     private TextView cadastrar;
-    private TextView consultar;
     private UsuarioController crudUser;
     private static String [][] listaUser;
 
@@ -35,10 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         senha = findViewById(R.id.editSenhaId);
         entrar = findViewById(R.id.btnEntrarId);
         cadastrar = findViewById(R.id.txtCadastroId);
-        consultar = findViewById(R.id.consultarID);
 
 
-        user = login.getText().toString();
+
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 crudUser = new UsuarioController(getBaseContext());
                 String loginString = login.getText().toString();
                 String senhaString = senha.getText().toString();
+                user = login.getText().toString();
 
                 boolean usuarioValido = usuarioExiste(loginString, senhaString);
                 if (usuarioValido){
@@ -66,14 +65,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        consultar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
-                intent.putExtra("USUARIO", user);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -83,19 +74,26 @@ public class LoginActivity extends AppCompatActivity {
         int campoLogin = cursor.getColumnIndex("login");
         int campoSenha = cursor.getColumnIndex("senha");
         int size = cursor.getCount();
-        for (int i = 0; i < cursor.getCount(); i++){
+
+        if (size > 0) {
             listaUser = new String[cursor.getCount()][2];
-            listaUser[i][0] = cursor.getString(campoLogin);
-            listaUser[i][1] = cursor.getString(campoSenha);
-            if (i <= cursor.getCount())
-                cursor.moveToNext();
-        }
-        for (int i = 0; i < listaUser.length; i++){
-            if (listaUser[i][0].equalsIgnoreCase(login) && listaUser[i][1].equalsIgnoreCase(senha)){
-                return true;
+            for (int i = 0; i < cursor.getCount(); i++) {
+                listaUser[i][0] = cursor.getString(campoLogin);
+                listaUser[i][1] = cursor.getString(campoSenha);
+                if (i <= cursor.getCount())
+                    cursor.moveToNext();
+            }
+
+            if (listaUser.length > 0) {
+                for (int i = 0; i < listaUser.length; i++) {
+                    String loginString = listaUser[i][0];
+                    String senhaString = listaUser[i][1];
+                    if (loginString.equalsIgnoreCase(login) && senhaString.equalsIgnoreCase(senha)) {
+                        return true;
+                    }
+                }
             }
         }
-
         return false;
     }
 }
