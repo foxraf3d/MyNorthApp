@@ -1,7 +1,7 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Controller.UsuarioController;
-import Intermediate.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView cadastrar;
     private UsuarioController crudUser;
     private static String [][] listaUser;
+    public static final String PREFS_MYNORTH = "MyPrefsMyNorth";
+    private SharedPreferences sPref;
 
     private String user;
 
@@ -36,6 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         cadastrar = findViewById(R.id.txtCadastroId);
 
 
+        user = verificarUsuarioLogado();
+        if (user != null){
+            Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+            intent.putExtra("USUARIO", user);
+            startActivity(intent);
+        }
 
 
         entrar.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean usuarioValido = usuarioExiste(loginString, senhaString);
                 if (usuarioValido){
+                    //Recuperando arquivo de preferencias:
+                    salvarUsuarioLogado(loginString);
                     Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
                     intent.putExtra("USUARIO", user);
                     startActivity(intent);
@@ -66,6 +75,19 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private String verificarUsuarioLogado() {
+        sPref = getSharedPreferences(PREFS_MYNORTH, MODE_PRIVATE);
+        String usuarioLogado = sPref.getString("loginUser", null);
+        return usuarioLogado;
+    }
+
+    private void salvarUsuarioLogado(String login) {
+        sPref = getSharedPreferences(PREFS_MYNORTH, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString("loginUser", login);
+        editor.commit();
     }
 
     public boolean usuarioExiste(String login, String senha){

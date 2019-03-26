@@ -1,10 +1,13 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +18,7 @@ import Controller.UsuarioController;
 public class PrincipalActivity extends AppCompatActivity {
 
     private TextView user;
+    private Button sair;
     private UsuarioController crudUser;
  
     @Override
@@ -23,6 +27,7 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         user = findViewById(R.id.txtUserID);
+        sair = findViewById(R.id.btnLogOUT);
 
         Bundle extras = getIntent().getExtras();
 
@@ -30,6 +35,17 @@ public class PrincipalActivity extends AppCompatActivity {
             String nomeUsuario = extras.getString("USUARIO");
             user.setText(nomeUsuario);
         }
+
+        sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences(LoginActivity.PREFS_MYNORTH, MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+                finish();
+            }
+        });
 
        /* try {
             crudUser = new UsuarioController(getBaseContext());
