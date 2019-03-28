@@ -16,17 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
 import Controller.UsuarioController;
+import DAL.CriaBanco;
 
 public class PrincipalActivity extends AppCompatActivity {
 
     private String nomeUsuario;
     private UsuarioController crudUser;
     private Toolbar toolbar;
+    private CriaBanco db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +94,14 @@ public class PrincipalActivity extends AppCompatActivity {
             case R.id.item_sair:
                 deslogarUsuario();
                 return true;
-            case R.id.item_configuracoes:
-                return true;
+            case R.id.item_backupBanco:
+                try{
+                    new UsuarioController(getBaseContext()).copiaBanco();
+                    Toast.makeText(getApplicationContext(), "Banco de dados copiado com sucesso!", Toast.LENGTH_LONG).show();
+                    return true;
+                }catch (Exception e){
+                    e.getMessage();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

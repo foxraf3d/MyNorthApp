@@ -24,7 +24,6 @@ public class CriaBanco extends SQLiteOpenHelper {
     public static String LOGIN = "login";
     public static String SENHA = "senha";
     public static final int VERSAO = 1;
-    private boolean bkupOk = false;
 
     //campos tabela usuário
     public int idUsuario = 0;
@@ -86,41 +85,5 @@ public class CriaBanco extends SQLiteOpenHelper {
         return sql;
     }
 
-    public void copiaBanco() {
-        try{
-            SQLiteDatabase writableDatabase = getWritableDatabase();
-            String path = writableDatabase.getPath();
-            Log.i(TAG, "caminho pro banco "+path);
-            File dbFile = new File(path);
-            Log.i(TAG, "File criado "+dbFile);
-            File bkup = new File(Environment.getExternalStorageDirectory(), dbFile.getName());
-            Log.i(TAG, "File dest criado "+bkup);
-            copyFile(dbFile, bkup);
-            Log.i(TAG, "Copiado com sucesso ");
-            bkupOk = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean copyFile(File from, File to) {
-
-        try {
-
-            FileChannel source = new FileInputStream(from).getChannel();
-            FileChannel destination = new FileOutputStream(to).getChannel();
-
-            System.out.println("from "+from.getAbsolutePath());
-            System.out.println("to   "+to.getAbsolutePath());
-
-            destination.transferFrom(source, 0, source.size());
-            source.close();
-            destination.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
 
 }
