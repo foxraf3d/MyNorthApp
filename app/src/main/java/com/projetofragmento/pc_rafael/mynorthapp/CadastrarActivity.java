@@ -41,23 +41,29 @@ public class CadastrarActivity extends AppCompatActivity {
                 String confirmarSenhaString = confirmarSenha.getText().toString();
                 String resultado;
 
-                boolean senhaValida = Util.validaSenha(senhaString, confirmarSenhaString);
+                String campoNaoPreenchido = Util.validaCadastroUsuario(loginString, senhaString, confirmarSenhaString);
 
-                if (senhaValida) {
-                    resultado = crudUser.inserirUsuario(loginString, senhaString);
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(getBaseContext(), resultado, Toast.LENGTH_LONG).show();
+                if (campoNaoPreenchido == ""){
+                    boolean senhaValida = Util.validaSenha(senhaString, confirmarSenhaString);
+
+                    if (senhaValida) {
+                        resultado = crudUser.inserirUsuario(loginString, senhaString);
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getBaseContext(), resultado, Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Senhas não coincidem!", Toast.LENGTH_LONG).show();
+                    }
                 }else{
-                    Toast.makeText(getBaseContext(), "Erro ao cadastrar usuário!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Favor preencher o campo "+campoNaoPreenchido+"!", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private Cursor ConsultarDados() {
+    /*private Cursor ConsultarDados() {
         Cursor cursor = crudUser.carregaDados();
         System.out.println("DADOS: "+cursor);
         return cursor;
-    }
+    }*/
 }

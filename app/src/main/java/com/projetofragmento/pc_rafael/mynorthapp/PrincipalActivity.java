@@ -88,11 +88,9 @@ public class PrincipalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.item_sair:
-                // deslogar
                 deslogarUsuario();
                 return true;
             case R.id.item_configuracoes:
-                //Configurações
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

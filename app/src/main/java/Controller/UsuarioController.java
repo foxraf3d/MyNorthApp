@@ -5,20 +5,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import DAL.UsuarioDAL;
+import DAL.CriaBanco;
 import Entities.UsuarioEntity;
 import Intermediate.Define_Tabela;
 
 public class UsuarioController{
 
     private SQLiteDatabase db;
-    private UsuarioDAL banco;
+    private CriaBanco banco;
     private Cursor cursor;
     private UsuarioEntity usuarioEntity = new UsuarioEntity();
     private Define_Tabela dt = new Define_Tabela();
 
     public UsuarioController(Context context) {
-        banco = new UsuarioDAL(context);
+        banco = new CriaBanco(context);
     }
 
     public String inserirUsuario(String login, String senha){
