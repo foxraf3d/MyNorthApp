@@ -16,6 +16,10 @@ import DAL.CriaBanco;
 import Entities.UsuarioEntity;
 import Intermediate.Define_Tabela;
 
+import static Intermediate.Define_Tabela.TABELA_USUARIO;
+import static Intermediate.Define_Tabela.login;
+import static Intermediate.Define_Tabela.nomeTabelaUsuario;
+import static Intermediate.Define_Tabela.senha;
 import static android.content.ContentValues.TAG;
 
 public class UsuarioController{
@@ -23,7 +27,6 @@ public class UsuarioController{
     private SQLiteDatabase db;
     private CriaBanco banco;
     private Cursor cursor;
-    private UsuarioEntity usuarioEntity = new UsuarioEntity();
     private Define_Tabela dt = new Define_Tabela();
 
     private boolean bkupOk = false;
@@ -32,16 +35,16 @@ public class UsuarioController{
         banco = new CriaBanco(context);
     }
 
-    public String inserirUsuario(String login, String senha){
+    public String inserirUsuario(String _login, String _senha){
         ContentValues valores;
         long resultado;
 
         db = banco.getWritableDatabase();
         valores = new ContentValues();
-        valores.put(banco.LOGIN, login);
-        valores.put(banco.SENHA, senha);
+        valores.put(TABELA_USUARIO[login], _login);
+        valores.put(TABELA_USUARIO[senha], _senha);
 
-        resultado = db.insert(banco.TABELA, null, valores);
+        resultado = db.insert(TABELA_USUARIO[nomeTabelaUsuario], null, valores);
         db.close();
 
         if (resultado == -1)

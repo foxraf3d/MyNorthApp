@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import Controller.UsuarioController;
+import Entities.UsuarioEntity;
 import Intermediate.Util;
 
 public class CadastrarActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class CadastrarActivity extends AppCompatActivity {
     private EditText confirmarSenha;
     private Button cadastrar;
     private UsuarioController crudUser;
+    private UsuarioEntity usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +38,19 @@ public class CadastrarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 crudUser = new UsuarioController(getBaseContext());
-                String loginString = login.getText().toString();
-                String senhaString = senha.getText().toString();
+                usuario = new UsuarioEntity();
+                usuario.setLogin(login.getText().toString());
+                usuario.setSenha(senha.getText().toString());
                 String confirmarSenhaString = confirmarSenha.getText().toString();
                 String resultado;
 
-                String campoNaoPreenchido = Util.validaCadastroUsuario(loginString, senhaString, confirmarSenhaString);
+                String campoNaoPreenchido = Util.validaCadastroUsuario(usuario.getLogin(), usuario.getSenha(), confirmarSenhaString);
 
                 if (campoNaoPreenchido == ""){
-                    boolean senhaValida = Util.validaSenha(senhaString, confirmarSenhaString);
+                    boolean senhaValida = Util.validaSenha(usuario.getSenha(), confirmarSenhaString);
 
                     if (senhaValida) {
-                        resultado = crudUser.inserirUsuario(loginString, senhaString);
+                        resultado = crudUser.inserirUsuario(usuario.getLogin(), usuario.getSenha());
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                         Toast.makeText(getBaseContext(), resultado, Toast.LENGTH_LONG).show();
