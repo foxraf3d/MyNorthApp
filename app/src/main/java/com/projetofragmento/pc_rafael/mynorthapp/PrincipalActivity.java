@@ -1,10 +1,12 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,9 +105,36 @@ public class PrincipalActivity extends AppCompatActivity {
                 }catch (Exception e){
                     e.getMessage();
                 }
+            case R.id.item_addTipoConta:
+                adicionarTipoConta();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void adicionarTipoConta() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PrincipalActivity.this);
+
+        //Configurando a Dialog
+        alertDialog.setTitle("Adicionar Tipo de Conta");
+        alertDialog.setMessage("Tipo de Conta");
+        alertDialog.setCancelable(false);
+
+        final EditText editText = new EditText(PrincipalActivity.this);
+        alertDialog.setView(editText);
+
+        alertDialog.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String tipoConta = editText.getText().toString();
+                //Valida se o campo foi preenchido
+                if (tipoConta.isEmpty()){
+                    Toast.makeText(PrincipalActivity.this, "Informe um tipo de conta", Toast.LENGTH_SHORT).show();
+                }else{
+                    
+                }
+            }
+        });
     }
 
     private void deslogarUsuario() {

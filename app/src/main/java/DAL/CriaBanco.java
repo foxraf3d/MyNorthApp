@@ -61,8 +61,8 @@ public class CriaBanco extends SQLiteOpenHelper {
         String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_CONTASPENDENTES[nomeTabelaContaPendente]+"(" +
                 ""+Define_Tabela.TABELA_CONTASPENDENTES[idContaPendente]+" integer primary key autoincrement," +
                 ""+Define_Tabela.TABELA_CONTASPENDENTES[tipoContaPendente]+" text," +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataVencimento]+" text" +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataPagamento]+" text" +
+                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataVencimento]+" text," +
+                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataPagamento]+" text," +
                 ""+Define_Tabela.TABELA_CONTASPENDENTES[valorContaPendente]+" text)";
         return sql;
     }

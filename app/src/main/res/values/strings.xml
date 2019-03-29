@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MyNorth App</string>
     <string name="item_cadConta">Cadastrar Conta</string>
+    <string name="item_addtipoconta">Adicionar Tipo Conta</string>
     <string name="item_backupBanco">Backup Banco</string>
     <string name="item_sair">Sair</string>
     <string name="item_pesquisa">Pesquisar</string>
