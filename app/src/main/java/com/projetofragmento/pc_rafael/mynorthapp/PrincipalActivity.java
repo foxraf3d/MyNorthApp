@@ -1,31 +1,24 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
-import java.util.ArrayList;
-
+import Controller.TipoContaController;
 import Controller.UsuarioController;
-import DAL.CriaBanco;
+import helper.CriaBanco;
+import Entities.TipoContaEntity;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -33,6 +26,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private UsuarioController crudUser;
     private Toolbar toolbar;
     private CriaBanco db;
+    private TipoContaController crudTipoConta;
+    private TipoContaEntity tipoContaEntity;
+
 
 
     @Override
@@ -52,6 +48,9 @@ public class PrincipalActivity extends AppCompatActivity {
         toolbar.setTitle("MyNorthApp");
         toolbar.setSubtitle("...olá "+ nomeUsuario);
         setSupportActionBar(toolbar);
+
+
+        //Sliding Tabs
 
 
        /* try {
@@ -131,10 +130,31 @@ public class PrincipalActivity extends AppCompatActivity {
                 if (tipoConta.isEmpty()){
                     Toast.makeText(PrincipalActivity.this, "Informe um tipo de conta", Toast.LENGTH_SHORT).show();
                 }else{
-                    
+                    String feedback = inserirTipoConta(tipoConta);
+                    Toast.makeText(PrincipalActivity.this, feedback, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog.create();
+        alertDialog.show();
+    }
+
+    private String inserirTipoConta(String tipoConta) {
+        crudTipoConta = new TipoContaController(getBaseContext());
+        tipoContaEntity = new TipoContaEntity();
+        tipoContaEntity.setTipoConta(tipoConta);
+        String resultado;
+
+        resultado = crudTipoConta.inserirTipoConta(tipoContaEntity.getTipoConta());
+        return resultado;
     }
 
     private void deslogarUsuario() {
@@ -144,7 +164,6 @@ public class PrincipalActivity extends AppCompatActivity {
         editor.commit();
         finish();
     }
-
 
     private Cursor ConsultarDados() {
         Cursor cursor = crudUser.carregaDados();

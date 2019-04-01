@@ -1,4 +1,4 @@
-package DAL;
+package helper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

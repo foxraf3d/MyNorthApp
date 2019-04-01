@@ -12,8 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
-import DAL.CriaBanco;
-import Entities.UsuarioEntity;
+import helper.CriaBanco;
 import Intermediate.Define_Tabela;
 
 import static Intermediate.Define_Tabela.TABELA_USUARIO;
