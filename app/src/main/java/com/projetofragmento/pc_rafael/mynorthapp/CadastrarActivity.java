@@ -1,9 +1,6 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
-import android.app.Application;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +10,7 @@ import android.widget.Toast;
 
 import Controller.UsuarioController;
 import Entities.UsuarioEntity;
-import Intermediate.Util;
+import Helper.Util;
 
 public class CadastrarActivity extends AppCompatActivity {
 

@@ -1,10 +1,4 @@
-package Intermediate;
-
-import android.database.Cursor;
-
-import java.util.ArrayList;
-
-import Controller.UsuarioController;
+package Helper;
 
 public class Util {
 

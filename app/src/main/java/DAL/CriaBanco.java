@@ -1,12 +1,12 @@
-package helper;
+package DAL;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import Intermediate.Define_Tabela;
+import Helper.Define_Tabela;
 
-import static Intermediate.Define_Tabela.*;
+import static Helper.Define_Tabela.*;
 
 public class CriaBanco extends SQLiteOpenHelper {
 

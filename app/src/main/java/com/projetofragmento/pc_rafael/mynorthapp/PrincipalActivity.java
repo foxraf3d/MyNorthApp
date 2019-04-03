@@ -1,10 +1,11 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,11 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import Adapter.TabAdapter;
 import Controller.TipoContaController;
 import Controller.UsuarioController;
-import helper.CriaBanco;
+import DAL.CriaBanco;
+import DAL.SlidingTabLayout;
 import Entities.TipoContaEntity;
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -28,6 +31,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private CriaBanco db;
     private TipoContaController crudTipoConta;
     private TipoContaEntity tipoContaEntity;
+
+    private SlidingTabLayout slidingTabLayout;
+    private ViewPager viewPager;
 
 
 
@@ -49,8 +55,18 @@ public class PrincipalActivity extends AppCompatActivity {
         toolbar.setSubtitle("...olá "+ nomeUsuario);
         setSupportActionBar(toolbar);
 
-
         //Sliding Tabs
+        slidingTabLayout = findViewById(R.id.stl_tabs);
+        viewPager = findViewById(R.id.vp_pagina);
+
+        slidingTabLayout.setDistributeEvenly(true);
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this, R.color.colorAccent));
+
+        //Adapter
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabAdapter);
+
+        slidingTabLayout.setViewPager(viewPager);
 
 
        /* try {
