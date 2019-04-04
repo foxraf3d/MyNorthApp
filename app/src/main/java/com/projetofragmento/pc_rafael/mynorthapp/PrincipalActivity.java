@@ -60,7 +60,7 @@ public class PrincipalActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.vp_pagina);
 
         slidingTabLayout.setDistributeEvenly(true);
-        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this, R.color.colorAccent));
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this, R.color.textColor));
 
         //Adapter
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
