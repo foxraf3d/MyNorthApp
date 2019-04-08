@@ -41,4 +41,14 @@ public class TipoContaController {
             return "Tipo de Conta inserido com sucesso!";
         }
     }
+
+    public Cursor carregaDados(){
+        db = banco.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaConta]+" ORDER BY id", null);
+        if (cursor!=null) {
+            cursor.moveToFirst();
+        }
+        db.close();
+        return cursor;
+    }
 }

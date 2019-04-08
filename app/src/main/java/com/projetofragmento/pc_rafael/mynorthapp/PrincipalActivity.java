@@ -68,34 +68,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
         slidingTabLayout.setViewPager(viewPager);
 
-
-       /* try {
-            crudUser = new UsuarioController(getBaseContext());
-            Cursor cursor = ConsultarDados();
-
-            int indiceColunaID = cursor.getColumnIndex("id");
-            int indiceColunaLogin = cursor.getColumnIndex("login");
-
-            itens = new ArrayList<String>();
-            ids = new ArrayList<Integer>();
-            itensAdaptador = new ArrayAdapter<String>(getBaseContext(),
-                    android.R.layout.simple_list_item_1,
-                    android.R.id.text1,
-                    itens);
-            listUser.setAdapter(itensAdaptador);
-            cursor.moveToFirst();
-
-            for (int i = 1; i <= cursor.getCount(); i++){
-                itens.add(cursor.getString(indiceColunaLogin));
-                ids.add(Integer.parseInt(cursor.getString(indiceColunaID)));
-                Log.i("Resultado ", "ID: " + cursor.getString(indiceColunaID) + " LOGIN: " + cursor.getString(indiceColunaLogin));
-                if (i <= cursor.getCount())
-                cursor.moveToNext();
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
     }
 
 
@@ -181,8 +153,5 @@ public class PrincipalActivity extends AppCompatActivity {
         finish();
     }
 
-    private Cursor ConsultarDados() {
-        Cursor cursor = crudUser.carregaDados();
-        return cursor;
-    }
+
 }
