@@ -5,6 +5,11 @@ public class TipoContaEntity {
     private String id;
     private String tipoConta;
 
+    public TipoContaEntity(String id, String tipoConta) {
+        this.setId(id);
+        this.setTipoConta(tipoConta);
+    }
+
     public String getId() {
         return id;
     }

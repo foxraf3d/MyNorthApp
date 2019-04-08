@@ -137,8 +137,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private String inserirTipoConta(String tipoConta) {
         crudTipoConta = new TipoContaController(getBaseContext());
-        tipoContaEntity = new TipoContaEntity();
-        tipoContaEntity.setTipoConta(tipoConta);
+        tipoContaEntity = new TipoContaEntity(null , tipoConta);
         String resultado;
 
         resultado = crudTipoConta.inserirTipoConta(tipoContaEntity.getTipoConta());

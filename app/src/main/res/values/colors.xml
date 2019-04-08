@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="color3dots">#FFFFFF</color>
     <color name="textColor">#FFFFFF</color>
+    <color name="cardcolor">#BDBDBD</color>
 </resources>

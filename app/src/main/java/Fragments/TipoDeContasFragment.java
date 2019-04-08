@@ -58,7 +58,7 @@ public class TipoDeContasFragment extends Fragment {
             int indiceColunaLogin = cursor.getColumnIndex("tipoConta");
 
             ArrayList<String> itens = new ArrayList<String>();
-            ArrayList<Integer> ids = new ArrayList<Integer>();
+            ArrayList<String> ids = new ArrayList<String>();
 
 //            ArrayAdapter<String> itensAdaptador = new ArrayAdapter<String>(getBaseContext(),
 //                    android.R.layout.simple_list_item_1,
@@ -68,15 +68,15 @@ public class TipoDeContasFragment extends Fragment {
 
             cursor.moveToFirst();
 
-            for (int i = 1; i <= cursor.getCount(); i++){
+            for (int i = 0; i < cursor.getCount(); i++){
                 itens.add(cursor.getString(indiceColunaLogin));
-                ids.add(Integer.parseInt(cursor.getString(indiceColunaID)));
-                Log.i("Resultado ", "ID: " + cursor.getString(indiceColunaID) + " LOGIN: " + cursor.getString(indiceColunaLogin));
+                ids.add(cursor.getString(indiceColunaID));
+                Log.i("Resultado ", "ID: " + cursor.getString(indiceColunaID) + " TIPO_CONTA: " + cursor.getString(indiceColunaLogin));
                 if (i <= cursor.getCount())
                     cursor.moveToNext();
             }
 
-            List<TipoContaEntity> listaTipoContaEntity = converteArrayParaEntity(itens);
+            List<TipoContaEntity> listaTipoContaEntity = converteArrayParaEntity(ids, itens);
 
             TipoContaAdapter tipoContaAdapter = new TipoContaAdapter(listaTipoContaEntity);
             rv.setAdapter(tipoContaAdapter);
@@ -88,12 +88,12 @@ public class TipoDeContasFragment extends Fragment {
         return view;
     }
 
-    private List<TipoContaEntity> converteArrayParaEntity(ArrayList<String> itens) {
-        TipoContaEntity tCEntity = new TipoContaEntity();
-        List<TipoContaEntity> listTCEntit = null;
-        for (int i = 0; i <= itens.size(); i++){
-            tCEntity.setTipoConta(itens.get(i));
-            listTCEntit.add(i, tCEntity);
+    private List<TipoContaEntity> converteArrayParaEntity(ArrayList<String> ids,ArrayList<String> itens) {
+        TipoContaEntity tCEntity;
+        List<TipoContaEntity> listTCEntit = new ArrayList<>();
+        for (int i = 0; i < itens.size(); i++){
+            tCEntity = new TipoContaEntity(ids.get(i),itens.get(i));
+            listTCEntit.add(new TipoContaEntity(tCEntity.getId(),tCEntity.getTipoConta()));
         }
         return listTCEntit;
     }
