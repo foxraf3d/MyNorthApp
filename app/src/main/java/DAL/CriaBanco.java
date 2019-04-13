@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import Helper.Define_Tabela;
+import helper.Define_Tabela;
 
-import static Helper.Define_Tabela.*;
+import static helper.Define_Tabela.*;
 
 public class CriaBanco extends SQLiteOpenHelper {
 

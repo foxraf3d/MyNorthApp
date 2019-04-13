@@ -13,12 +13,12 @@ import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
 import DAL.CriaBanco;
-import Helper.Define_Tabela;
+import helper.Define_Tabela;
 
-import static Helper.Define_Tabela.TABELA_USUARIO;
-import static Helper.Define_Tabela.login;
-import static Helper.Define_Tabela.nomeTabelaUsuario;
-import static Helper.Define_Tabela.senha;
+import static helper.Define_Tabela.TABELA_USUARIO;
+import static helper.Define_Tabela.login;
+import static helper.Define_Tabela.nomeTabelaUsuario;
+import static helper.Define_Tabela.senha;
 import static android.content.ContentValues.TAG;
 
 public class UsuarioController{

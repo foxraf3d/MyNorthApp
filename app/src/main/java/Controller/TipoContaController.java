@@ -6,11 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import DAL.CriaBanco;
-import Helper.Define_Tabela;
+import helper.Define_Tabela;
 
-import static Helper.Define_Tabela.TABELA_TIPOCONTAS;
-import static Helper.Define_Tabela.nomeTabelaConta;
-import static Helper.Define_Tabela.tipoConta;
+import static helper.Define_Tabela.TABELA_TIPOCONTAS;
+import static helper.Define_Tabela.nomeTabelaConta;
+import static helper.Define_Tabela.tipoConta;
 
 public class TipoContaController {
 
