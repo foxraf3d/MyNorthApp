@@ -34,6 +34,8 @@ public class TipoDeContasFragment extends Fragment {
     private RecyclerView rv;
     private TipoContaController tcController;
     private CriaBanco db;
+    private TipoContaAdapter tipoContaAdapter;
+    private List<TipoContaEntity> listaTipoContaEntity;
 
     public TipoDeContasFragment() {
         // Required empty public constructor
@@ -60,12 +62,6 @@ public class TipoDeContasFragment extends Fragment {
             ArrayList<String> itens = new ArrayList<String>();
             ArrayList<String> ids = new ArrayList<String>();
 
-//            ArrayAdapter<String> itensAdaptador = new ArrayAdapter<String>(getBaseContext(),
-//                    android.R.layout.simple_list_item_1,
-//                    android.R.id.text1,
-//                    itens);
-//            listUser.setAdapter(itensAdaptador);
-
             cursor.moveToFirst();
 
             for (int i = 0; i < cursor.getCount(); i++){
@@ -76,9 +72,9 @@ public class TipoDeContasFragment extends Fragment {
                     cursor.moveToNext();
             }
 
-            List<TipoContaEntity> listaTipoContaEntity = converteArrayParaEntity(ids, itens);
+            listaTipoContaEntity = converteArrayParaEntity(ids, itens);
 
-            TipoContaAdapter tipoContaAdapter = new TipoContaAdapter(listaTipoContaEntity);
+            tipoContaAdapter = new TipoContaAdapter(listaTipoContaEntity);
             rv.setAdapter(tipoContaAdapter);
 
         }catch (Exception e){
@@ -102,5 +98,7 @@ public class TipoDeContasFragment extends Fragment {
         Cursor cursor = tcController.carregaDados();
         return cursor;
     }
+
+
 
 }

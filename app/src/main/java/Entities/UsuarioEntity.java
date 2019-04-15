@@ -6,6 +6,12 @@ public class UsuarioEntity {
     public String login;
     public String senha;
 
+    public UsuarioEntity(String id, String login, String senha) {
+        this.id = id;
+        this.login = login;
+        this.senha = senha;
+    }
+
     public String getId() {
         return id;
     }

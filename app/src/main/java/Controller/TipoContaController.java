@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import DAL.CriaBanco;
+import Entities.TipoContaEntity;
 import helper.Define_Tabela;
 
 import static helper.Define_Tabela.TABELA_TIPOCONTAS;
+import static helper.Define_Tabela.idConta;
 import static helper.Define_Tabela.nomeTabelaConta;
 import static helper.Define_Tabela.tipoConta;
 
@@ -51,4 +53,23 @@ public class TipoContaController {
         db.close();
         return cursor;
     }
+
+    public TipoContaEntity retornaUltimoRegistro(){
+        db = banco.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaConta]+" ORDER BY id DESC", null);
+        if (cursor!=null){
+            cursor.moveToFirst();
+            String id = cursor.getString(cursor.getColumnIndex(TABELA_TIPOCONTAS[idConta]));
+            String tipoContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_TIPOCONTAS[tipoConta]));
+            return new TipoContaEntity(id, tipoContaColuna);
+        }
+        db.close();
+        return null;
+    }
+
+    public boolean delete(int id){
+        db = banco.getWritableDatabase();
+        return db.delete(TABELA_TIPOCONTAS[nomeTabelaConta], "id=?", new String[]{id + ""}) > 0;
+    }
+
 }

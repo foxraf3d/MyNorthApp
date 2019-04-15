@@ -35,9 +35,9 @@ public class CadastrarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 crudUser = new UsuarioController(getBaseContext());
-                usuario = new UsuarioEntity();
-                usuario.setLogin(login.getText().toString());
-                usuario.setSenha(senha.getText().toString());
+                usuario = new UsuarioEntity(null,login.getText().toString(),senha.getText().toString());
+//                usuario.setLogin(login.getText().toString());
+//                usuario.setSenha(senha.getText().toString());
                 String confirmarSenhaString = confirmarSenha.getText().toString();
                 String resultado;
 

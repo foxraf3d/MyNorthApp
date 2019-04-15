@@ -1,9 +1,7 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -16,7 +14,11 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Adapter.TabAdapter;
+import Adapter.TipoContaAdapter;
 import Controller.TipoContaController;
 import Controller.UsuarioController;
 import DAL.CriaBanco;
@@ -106,6 +108,7 @@ public class PrincipalActivity extends AppCompatActivity {
         alertDialog.setTitle("Adicionar Tipo de Conta");
         alertDialog.setMessage("Tipo de Conta");
         alertDialog.setCancelable(false);
+        alertDialog.setIcon(R.mipmap.ic_mynorthapp);
 
         final EditText editText = new EditText(PrincipalActivity.this);
         alertDialog.setView(editText);
@@ -120,6 +123,9 @@ public class PrincipalActivity extends AppCompatActivity {
                 }else{
                     String feedback = inserirTipoConta(tipoConta);
                     Toast.makeText(PrincipalActivity.this, feedback, Toast.LENGTH_SHORT).show();
+                    tipoContaEntity = retornaUltimoRegistro();
+                    TipoContaAdapter tcAdapter = new TipoContaAdapter(TipoContaAdapter.listaTipoConta);
+                    tcAdapter.notificaInsertTipoConta(tipoContaEntity);
                 }
             }
         });
@@ -135,12 +141,12 @@ public class PrincipalActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+
     private String inserirTipoConta(String tipoConta) {
         crudTipoConta = new TipoContaController(getBaseContext());
-        tipoContaEntity = new TipoContaEntity(null , tipoConta);
         String resultado;
 
-        resultado = crudTipoConta.inserirTipoConta(tipoContaEntity.getTipoConta());
+        resultado = crudTipoConta.inserirTipoConta(tipoConta);
         return resultado;
     }
 
@@ -150,6 +156,12 @@ public class PrincipalActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
         finish();
+    }
+
+    private TipoContaEntity retornaUltimoRegistro(){
+        crudTipoConta = new TipoContaController(getBaseContext());
+        tipoContaEntity = crudTipoConta.retornaUltimoRegistro();
+        return tipoContaEntity;
     }
 
 
