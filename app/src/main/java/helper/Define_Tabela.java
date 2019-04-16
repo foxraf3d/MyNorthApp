@@ -11,15 +11,17 @@ public class Define_Tabela {
     public static String[] TABELA_TIPOCONTAS;
     public static final int idConta = 0;
     public static final int tipoConta = 1;
-    public static final int nomeTabelaConta = 2;
+    public static final int nomeTabelaTipoConta = 2;
 
-    public static String[] TABELA_CONTASPENDENTES;
-    public static final int idContaPendente = 0;
-    public static final int tipoContaPendente = 1;
-    public static final int dataVencimento = 2;
-    public static final int dataPagamento = 3;
-    public static final int valorContaPendente = 4;
-    public static final int nomeTabelaContaPendente = 5;
+    public static String[] TABELA_CONTAS;
+    public static final int idContaContas = 0;
+    public static final int anoConta = 1;
+    public static final int mesConta = 2;
+    public static final int numeroParcela = 3;
+    public static final int valorConta = 4;
+    public static final int dataVencimentoConta = 5;
+    public static final int dataPagamentoConta = 6;
+    public static final int nomeTabelaConta = 7;
 
     public Define_Tabela() {
         //Tabela Usuário
@@ -33,16 +35,18 @@ public class Define_Tabela {
         TABELA_TIPOCONTAS = new String [3];
         TABELA_TIPOCONTAS[idConta] = "id";
         TABELA_TIPOCONTAS[tipoConta] = "tipoConta";
-        TABELA_TIPOCONTAS[nomeTabelaConta] = "tipoContas";
+        TABELA_TIPOCONTAS[nomeTabelaTipoConta] = "tipoContas";
 
-        //Tabela Contas Pendentes
-        TABELA_CONTASPENDENTES = new String [6];
-        TABELA_CONTASPENDENTES[idContaPendente] = "id";
-        TABELA_CONTASPENDENTES[tipoContaPendente] = "tipoContaPendente";
-        TABELA_CONTASPENDENTES[dataVencimento] = "dataVencimento";
-        TABELA_CONTASPENDENTES[dataPagamento] = "dataPagamento";
-        TABELA_CONTASPENDENTES[valorContaPendente] = "valorContaPendente";
-        TABELA_CONTASPENDENTES[nomeTabelaContaPendente] = "contasPendentes";
+        //Tabela Contas
+        TABELA_CONTAS = new String [8];
+        TABELA_CONTAS[idContaContas] = "id";
+        TABELA_CONTAS[anoConta] = "anoConta";
+        TABELA_CONTAS[mesConta] = "mesConta";
+        TABELA_CONTAS[numeroParcela] = "numeroParcela";
+        TABELA_CONTAS[valorConta] = "valorConta";
+        TABELA_CONTAS[dataVencimentoConta] = "dataVencimentoConta";
+        TABELA_CONTAS[dataPagamentoConta] = "dataPagamentoConta";
+        TABELA_CONTAS[nomeTabelaConta] = "contas";
 
     }
 }
