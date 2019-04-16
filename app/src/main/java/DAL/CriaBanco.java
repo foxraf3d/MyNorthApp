@@ -23,11 +23,11 @@ public class CriaBanco extends SQLiteOpenHelper {
         String sqlUsuario = queryTabelaUsuario();
         db.execSQL(sqlUsuario);
 
-        String sqlTipoContas = queryTabelaContas();
+        String sqlTipoContas = queryTabelaTipoContas();
         db.execSQL(sqlTipoContas);
 
-        String sqlContasPendentes = queryTabelaContasPendentes();
-        db.execSQL(sqlContasPendentes);
+        String sqlContas = queryTabelaContas();
+        db.execSQL(sqlContas);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CriaBanco extends SQLiteOpenHelper {
         String sqlDropTableUsuario = dropTable(Define_Tabela.TABELA_USUARIO[nomeTabelaUsuario]);
         db.execSQL(sqlDropTableUsuario);
 
-        String sqlDropTableContas = dropTable(Define_Tabela.TABELA_TIPOCONTAS[nomeTabelaConta]);
+        String sqlDropTableContas = dropTable(Define_Tabela.TABELA_TIPOCONTAS[nomeTabelaTipoConta]);
         db.execSQL(sqlDropTableContas);
 
         onCreate(db);
@@ -50,22 +50,33 @@ public class CriaBanco extends SQLiteOpenHelper {
         return sql;
     }
 
-    private String queryTabelaContas(){
-        String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_TIPOCONTAS[nomeTabelaConta]+"(" +
+    private String queryTabelaTipoContas(){
+        String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_TIPOCONTAS[nomeTabelaTipoConta]+"(" +
                 ""+Define_Tabela.TABELA_TIPOCONTAS[idConta]+" integer primary key autoincrement," +
                 ""+Define_Tabela.TABELA_TIPOCONTAS[tipoConta]+" text)";
         return sql;
     }
 
-    private String queryTabelaContasPendentes() {
-        String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_CONTASPENDENTES[nomeTabelaContaPendente]+"(" +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[idContaPendente]+" integer primary key autoincrement," +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[tipoContaPendente]+" text," +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataVencimento]+" text," +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[dataPagamento]+" text," +
-                ""+Define_Tabela.TABELA_CONTASPENDENTES[valorContaPendente]+" text)";
+    private String queryTabelaContas() {
+        String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_CONTAS[nomeTabelaConta]+"(" +
+                ""+Define_Tabela.TABELA_CONTAS[idContaContas]+" integer primary key autoincrement," +
+                ""+Define_Tabela.TABELA_CONTAS[anoConta]+" text," +
+                ""+Define_Tabela.TABELA_CONTAS[mesConta]+" text," +
+                ""+Define_Tabela.TABELA_CONTAS[numeroParcela]+" text," +
+                ""+Define_Tabela.TABELA_CONTAS[valorConta]+" text," +
+                ""+Define_Tabela.TABELA_CONTAS[dataVencimentoConta]+" text,"+
+                ""+Define_Tabela.TABELA_CONTAS[dataPagamentoConta]+" text)";
         return sql;
     }
+
+/*    private String idConta;
+    private String anoConta;
+    private String mesConta;
+    private String numeroParcela;
+    private String valorConta;
+    private String dataVencimento;
+    private String dataPagamento;*/
+
 
     private String dropTable(String nomeTabela){
         String sql = "DROP TABLE IF EXISTS " + nomeTabela;

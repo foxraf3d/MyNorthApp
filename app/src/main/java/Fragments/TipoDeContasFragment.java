@@ -49,7 +49,7 @@ public class TipoDeContasFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_tipo_de_contas, container, false);
 
-        rv = view.findViewById(R.id.rv);
+        rv = view.findViewById(R.id.rvTipoConta);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         try {
