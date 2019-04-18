@@ -69,15 +69,6 @@ public class CriaBanco extends SQLiteOpenHelper {
         return sql;
     }
 
-/*    private String idConta;
-    private String anoConta;
-    private String mesConta;
-    private String numeroParcela;
-    private String valorConta;
-    private String dataVencimento;
-    private String dataPagamento;*/
-
-
     private String dropTable(String nomeTabela){
         String sql = "DROP TABLE IF EXISTS " + nomeTabela;
         return sql;

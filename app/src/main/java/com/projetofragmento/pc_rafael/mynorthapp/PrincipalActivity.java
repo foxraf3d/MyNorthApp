@@ -1,5 +1,6 @@
 package com.projetofragmento.pc_rafael.mynorthapp;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,14 +9,28 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import Adapter.TabAdapter;
 import Adapter.TipoContaAdapter;
@@ -24,6 +39,7 @@ import Controller.UsuarioController;
 import DAL.CriaBanco;
 import DAL.SlidingTabLayout;
 import Entities.TipoContaEntity;
+import helper.Util;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -36,7 +52,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
-
 
 
     @Override
@@ -96,10 +111,68 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
             case R.id.item_addTipoConta:
                 adicionarTipoConta();
+                return true;
+            case R.id.item_cadastrarConta:
+                adicionaConta();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void adicionaConta(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PrincipalActivity.this);
+
+        //Configurando a Dialog
+        alertDialog.setTitle("Cadastramento de Contas");
+        alertDialog.setMessage("Cadastre uma conta");
+        alertDialog.setCancelable(false);
+        alertDialog.setIcon(R.mipmap.ic_mynorthapp);
+
+        //Configurando elementes de interação com usuário.
+        LinearLayout layout = new LinearLayout(PrincipalActivity.this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText anoEdit = new EditText(PrincipalActivity.this);
+        anoEdit.setHint("Ano");
+        anoEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+        anoEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+        layout.addView(anoEdit);
+
+        final Spinner dropMes = new Spinner(PrincipalActivity.this);
+        String[] listMes = Util.listaMeses();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listMes);
+        dropMes.setAdapter(adapter);
+        layout.addView(dropMes);
+
+        final EditText numeroParcelaEdit = new EditText(PrincipalActivity.this);
+        numeroParcelaEdit.setHint("Parcela");
+        layout.addView(numeroParcelaEdit);
+
+        final EditText valorEdit = new EditText(PrincipalActivity.this);
+        valorEdit.setHint("Valor R$");
+        valorEdit.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        layout.addView(valorEdit);
+
+        
+
+        alertDialog.setView(layout);
+
+        /*valores.put(TABELA_CONTAS[anoConta], _anoConta);
+        valores.put(TABELA_CONTAS[mesConta], _mesConta);
+        valores.put(TABELA_CONTAS[numeroParcela], _numeroParcela);
+        valores.put(TABELA_CONTAS[valorConta], _valorConta);
+        valores.put(TABELA_CONTAS[dataVencimentoConta], _dataVencimento);
+        valores.put(TABELA_CONTAS[dataPagamentoConta], _dataPagamento);*/
+
+        //Configurando Botões
+
+
+        alertDialog.create();
+        alertDialog.show();
+
+    }
+
 
     private void adicionarTipoConta() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(PrincipalActivity.this);

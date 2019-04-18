@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.projetofragmento.pc_rafael.mynorthapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Controller.TipoContaController;

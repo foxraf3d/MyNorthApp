@@ -27,4 +27,23 @@ public class Util {
         return resultado;
     }
 
+    public static String[] listaMeses (){
+        String[] listaMes = new String[]{
+                "Selecione um mês...",
+                "JANEIRO",
+                "FEVEREIRO",
+                "MARÇO",
+                "ABRIL",
+                "MAIO",
+                "JUNHO",
+                "JULHO",
+                "AGOSTO",
+                "SETEMBRO",
+                "OUTUBRO",
+                "NOVEMBRO",
+                "DEZEMBRO"
+        };
+        return listaMes;
+    }
+
 }

@@ -12,6 +12,7 @@ import helper.Define_Tabela;
 import static helper.Define_Tabela.TABELA_TIPOCONTAS;
 import static helper.Define_Tabela.idConta;
 import static helper.Define_Tabela.nomeTabelaConta;
+import static helper.Define_Tabela.nomeTabelaTipoConta;
 import static helper.Define_Tabela.tipoConta;
 
 public class TipoContaController {
@@ -34,7 +35,7 @@ public class TipoContaController {
         valores = new ContentValues();
         valores.put(TABELA_TIPOCONTAS[tipoConta], _tipoConta);
 
-        resultado = db.insert(TABELA_TIPOCONTAS[nomeTabelaConta], null, valores);
+        resultado = db.insert(TABELA_TIPOCONTAS[nomeTabelaTipoConta], null, valores);
         db.close();
 
         if (resultado == -1){
@@ -46,7 +47,7 @@ public class TipoContaController {
 
     public Cursor carregaDados(){
         db = banco.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaConta]+" ORDER BY id", null);
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaTipoConta]+" ORDER BY id", null);
         if (cursor!=null) {
             cursor.moveToFirst();
         }
@@ -56,7 +57,7 @@ public class TipoContaController {
 
     public TipoContaEntity retornaUltimoRegistro(){
         db = banco.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaConta]+" ORDER BY id DESC", null);
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_TIPOCONTAS[nomeTabelaTipoConta]+" ORDER BY id DESC", null);
         if (cursor!=null){
             cursor.moveToFirst();
             String id = cursor.getString(cursor.getColumnIndex(TABELA_TIPOCONTAS[idConta]));
@@ -69,7 +70,7 @@ public class TipoContaController {
 
     public boolean delete(int id){
         db = banco.getWritableDatabase();
-        return db.delete(TABELA_TIPOCONTAS[nomeTabelaConta], "id=?", new String[]{id + ""}) > 0;
+        return db.delete(TABELA_TIPOCONTAS[nomeTabelaTipoConta], "id=?", new String[]{id + ""}) > 0;
     }
 
 }

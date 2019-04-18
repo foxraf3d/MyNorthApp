@@ -9,7 +9,7 @@ import java.util.List;
 
 import Entities.ContasEntity;
 
-public class ContasPendentesAdapter extends RecyclerView.Adapter<ContasPendentesAdapter.ContaPendenteViewHolder> {
+public class ContasAdapter extends RecyclerView.Adapter<ContasAdapter.ContaPendenteViewHolder> {
 
     public static List<ContasEntity> listaContas;
 
