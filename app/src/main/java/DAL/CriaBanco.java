@@ -60,9 +60,11 @@ public class CriaBanco extends SQLiteOpenHelper {
     private String queryTabelaContas() {
         String sql = "CREATE TABLE IF NOT EXISTS "+Define_Tabela.TABELA_CONTAS[nomeTabelaConta]+"(" +
                 ""+Define_Tabela.TABELA_CONTAS[idContaContas]+" integer primary key autoincrement," +
+                ""+Define_Tabela.TABELA_CONTAS[tipoContaContas]+" text," +
                 ""+Define_Tabela.TABELA_CONTAS[anoConta]+" text," +
                 ""+Define_Tabela.TABELA_CONTAS[mesConta]+" text," +
                 ""+Define_Tabela.TABELA_CONTAS[numeroParcela]+" text," +
+                ""+Define_Tabela.TABELA_CONTAS[qtdParcela]+" text," +
                 ""+Define_Tabela.TABELA_CONTAS[valorConta]+" text," +
                 ""+Define_Tabela.TABELA_CONTAS[dataVencimentoConta]+" text,"+
                 ""+Define_Tabela.TABELA_CONTAS[dataPagamentoConta]+" text)";

@@ -98,6 +98,9 @@ public class TipoContaAdapter extends RecyclerView.Adapter<TipoContaAdapter.Tipo
     }
 
     public void notificaInsertTipoConta(TipoContaEntity tipoConta){
+        if (listaTipoConta == null){
+            listaTipoConta = new ArrayList<>();
+        }
         listaTipoConta.add(tipoConta);
         notifyItemInserted(getItemCount());
     }

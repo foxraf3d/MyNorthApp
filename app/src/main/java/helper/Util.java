@@ -1,5 +1,11 @@
 package helper;
 
+import android.widget.Toast;
+
+import com.projetofragmento.pc_rafael.mynorthapp.PrincipalActivity;
+
+import java.util.ArrayList;
+
 public class Util {
 
     public static boolean validaSenha(String senha, String confirmaSenha){
@@ -44,6 +50,35 @@ public class Util {
                 "DEZEMBRO"
         };
         return listaMes;
+    }
+
+    public static boolean validaConta(String dropTipoConta,
+                                      String anoEdit,
+                                      String dropMes,
+                                      String numeroParcelaedit,
+                                      String qtdParcelaEdit,
+                                      String valorEdit,
+                                      String dataVencimentoEdit,
+                                      String dataPagamentoEdit){
+
+        ArrayList<String> campos = new ArrayList<>();
+        campos.add(dropTipoConta);
+        campos.add(anoEdit);
+        campos.add(dropMes);
+        campos.add(numeroParcelaedit);
+        campos.add(qtdParcelaEdit);
+        campos.add(valorEdit);
+        campos.add(dataVencimentoEdit);
+        campos.add(dataPagamentoEdit);
+
+        for (String valorCampo: campos) {
+            if (valorCampo.isEmpty()){
+                if (valorCampo == dataPagamentoEdit)
+                    return true;
+                return false;
+            }
+        }
+        return true;
     }
 
 }

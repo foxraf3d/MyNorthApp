@@ -15,6 +15,8 @@ import static helper.Define_Tabela.dataVencimentoConta;
 import static helper.Define_Tabela.mesConta;
 import static helper.Define_Tabela.nomeTabelaConta;
 import static helper.Define_Tabela.numeroParcela;
+import static helper.Define_Tabela.qtdParcela;
+import static helper.Define_Tabela.tipoContaContas;
 import static helper.Define_Tabela.valorConta;
 
 public class ContasController {
@@ -27,14 +29,17 @@ public class ContasController {
         banco = new CriaBanco(context);
     }
 
-    public String inserirConta(String _anoConta, String _mesConta, String _numeroParcela, String _valorConta, String _dataVencimento, String _dataPagamento){
+    public String inserirConta(String _tipoContaContas,String _anoConta, String _mesConta, String _numeroParcela,
+                               String _qtdParcela ,String _valorConta, String _dataVencimento, String _dataPagamento){
         ContentValues valores = new ContentValues();
         long resultado;
 
         db = banco.getReadableDatabase();
+        valores.put(TABELA_CONTAS[tipoContaContas], _tipoContaContas);
         valores.put(TABELA_CONTAS[anoConta], _anoConta);
         valores.put(TABELA_CONTAS[mesConta], _mesConta);
         valores.put(TABELA_CONTAS[numeroParcela], _numeroParcela);
+        valores.put(TABELA_CONTAS[qtdParcela], _qtdParcela);
         valores.put(TABELA_CONTAS[valorConta], _valorConta);
         valores.put(TABELA_CONTAS[dataVencimentoConta], _dataVencimento);
         valores.put(TABELA_CONTAS[dataPagamentoConta], _dataPagamento);
@@ -47,5 +52,15 @@ public class ContasController {
         }else{
             return "Conta inserida com sucesso!";
         }
+    }
+
+    public Cursor carregaDados(){
+        db = banco.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_CONTAS[nomeTabelaConta]+"ORDER BY id",null);
+        if (cursor!=null){
+            cursor.moveToFirst();
+        }
+        db.close();
+        return cursor;
     }
 }
