@@ -12,6 +12,7 @@ import static helper.Define_Tabela.TABELA_CONTAS;
 import static helper.Define_Tabela.anoConta;
 import static helper.Define_Tabela.dataPagamentoConta;
 import static helper.Define_Tabela.dataVencimentoConta;
+import static helper.Define_Tabela.idContaContas;
 import static helper.Define_Tabela.mesConta;
 import static helper.Define_Tabela.nomeTabelaConta;
 import static helper.Define_Tabela.numeroParcela;
@@ -29,8 +30,14 @@ public class ContasController {
         banco = new CriaBanco(context);
     }
 
-    public String inserirConta(String _tipoContaContas,String _anoConta, String _mesConta, String _numeroParcela,
-                               String _qtdParcela ,String _valorConta, String _dataVencimento, String _dataPagamento){
+    public String inserirConta(String _tipoContaContas,
+                               String _anoConta,
+                               String _mesConta,
+                               String _numeroParcela,
+                               String _qtdParcela ,
+                               String _valorConta,
+                               String _dataVencimento,
+                               String _dataPagamento){
         ContentValues valores = new ContentValues();
         long resultado;
 
@@ -56,11 +63,38 @@ public class ContasController {
 
     public Cursor carregaDados(){
         db = banco.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM "+TABELA_CONTAS[nomeTabelaConta]+"ORDER BY id",null);
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_CONTAS[nomeTabelaConta]+" ORDER BY id",null);
         if (cursor!=null){
             cursor.moveToFirst();
         }
         db.close();
         return cursor;
+    }
+
+    public ContasEntity retornaUltimoRegistro(){
+        db = banco.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM "+TABELA_CONTAS[nomeTabelaConta]+" ORDER BY id DESC", null);
+        if (cursor!=null){
+            cursor.moveToFirst();
+            String id = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[idContaContas]));
+            String tipoContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[tipoContaContas]));
+            String anoContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[anoConta]));
+            String mesContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[mesConta]));
+            String numParcContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[numeroParcela]));
+            String qtdParcelaContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[qtdParcela]));
+            String valorContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[valorConta]));
+            String dataVencimentoContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[dataVencimentoConta]));
+            String dataPagamentoContaColuna = cursor.getString(cursor.getColumnIndex(TABELA_CONTAS[dataPagamentoConta]));
+            return new ContasEntity(id, tipoContaColuna,anoContaColuna, mesContaColuna, numParcContaColuna, qtdParcelaContaColuna,
+                    valorContaColuna, dataVencimentoContaColuna, dataPagamentoContaColuna );
+        }
+        db.close();
+        return null;
+    }
+
+
+    public boolean delete (int id){
+        db = banco.getWritableDatabase();
+        return db.delete(TABELA_CONTAS[nomeTabelaConta],"id=?", new String[]{id + ""})>0;
     }
 }

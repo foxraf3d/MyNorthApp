@@ -12,8 +12,9 @@ public class ContasEntity {
     private String dataVencimento;
     private String dataPagamento;
 
-    public ContasEntity(String idConta, String tipoContasConta, String anoConta, String mesConta, String numeroParcela, String qtdParcela, String valorConta, String dataVencimento) {
-        this.idConta = idConta;
+    public ContasEntity(String idConta, String tipoContasConta, String anoConta, String mesConta, String numeroParcela, String qtdParcela, String valorConta, String dataVencimento, String dataPagamento) {
+        //this.idConta = idConta;
+        this.setIdConta(idConta);
         this.tipoContasConta = tipoContasConta;
         this.anoConta = anoConta;
         this.mesConta = mesConta;

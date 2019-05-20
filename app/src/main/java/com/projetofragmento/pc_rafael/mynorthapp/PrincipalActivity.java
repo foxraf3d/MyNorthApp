@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import Adapter.ContasAdapter;
 import Adapter.TabAdapter;
 import Adapter.TipoContaAdapter;
 import Controller.ContasController;
@@ -52,6 +53,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private TipoContaController crudTipoConta;
     private ContasController crudConta;
     private TipoContaEntity tipoContaEntity;
+    private ContasEntity contaEntity;
 
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
@@ -226,11 +228,14 @@ public class PrincipalActivity extends AppCompatActivity {
                             dataPagamentoEdit.getText().toString());
 
                     if (camposPreenchidos){
-                        String feedBack = inserirConta(new ContasEntity(dropTipoConta.getSelectedItem().toString(),
+                        String feedBack = inserirConta(dropTipoConta.getSelectedItem().toString(),
                                 anoEdit.getText().toString(), dropMes.getSelectedItem().toString(), numeroParcelaEdit.getText().toString(),
                                 qtdParcelaEdit.getText().toString(), valorEdit.getCurrencyText(),dataVencimentoEdit.getText().toString(),
-                                dataPagamentoEdit.getText().toString()));
+                                dataPagamentoEdit.getText().toString());
                         Toast.makeText(PrincipalActivity.this, feedBack, Toast.LENGTH_SHORT).show();
+                        contaEntity = retornaUltimoRegistroConta();
+                        ContasAdapter cAdapter = new ContasAdapter(ContasAdapter.listaContas);
+                        cAdapter.notificaInsertConta(contaEntity);
                     }else{
                         Toast.makeText(getApplicationContext(), "Verifique os dados da Conta.", Toast.LENGTH_LONG).show();
                     }
@@ -344,10 +349,9 @@ public class PrincipalActivity extends AppCompatActivity {
         return resultado;
     }
 
-    private String inserirConta(ContasEntity conta){
+    private String inserirConta(String tipoConta, String anoConta, String mesConta, String numParc, String qtdParc, String valorConta, String dataVencimento, String dataPagamento){
         crudConta = new ContasController(getBaseContext());
-        resultado = crudConta.inserirConta(conta.getTipoContasConta(), conta.getAnoConta(), conta.getMesConta(),
-                conta.getNumeroParcela(), conta.getQtdParcela(), conta.getValorConta(),conta.getDataVencimento(), conta.getDataPagamento());
+        resultado = crudConta.inserirConta(tipoConta, anoConta, mesConta, numParc, qtdParc, valorConta, dataVencimento,dataPagamento);
         return resultado;
     }
 
@@ -363,6 +367,12 @@ public class PrincipalActivity extends AppCompatActivity {
         crudTipoConta = new TipoContaController(getBaseContext());
         tipoContaEntity = crudTipoConta.retornaUltimoRegistro();
         return tipoContaEntity;
+    }
+
+    private ContasEntity retornaUltimoRegistroConta(){
+        crudConta = new ContasController(getBaseContext());
+        contaEntity = crudConta.retornaUltimoRegistro();
+        return contaEntity;
     }
 
 
